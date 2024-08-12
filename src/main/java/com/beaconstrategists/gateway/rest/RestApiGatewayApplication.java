@@ -1,4 +1,4 @@
-package com.beaconstrategists.rest_api_gateway;
+package com.beaconstrategists.gateway.rest;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
