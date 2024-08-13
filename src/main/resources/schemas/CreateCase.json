@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Case Information",
+  "type": "object",
+  "properties": {
+    "CaseType": {
+      "type": "string",
+      "enum": [
+        "TAC",
+        "RMA"
+      ]
+    },
+    "RequestDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "RequesterOrganization": {
+      "type": "string"
+    },
+    "RequesterFirstName": {
+      "type": "string"
+    },
+    "RequesterLastName": {
+      "type": "string"
+    },
+    "RequesterEmail": {
+      "type": "string",
+      "format": "email"
+    },
+    "RequesterPhone": {
+      "type": "string"
+    },
+    "InstallationCountry": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 2
+    },
+    "NetworkStatus": {
+      "type": "string",
+      "enum": [
+        "Production"
+      ]
+    },
+    "BusinessImpact": {
+      "type": "string"
+    },
+    "SubjectTitle": {
+      "type": "string"
+    },
+    "ProblemDescription": {
+      "type": "string"
+    },
+    "ProductName": {
+      "type": "string"
+    },
+    "ProductSerialNumber": {
+      "type": "string"
+    },
+    "ProductSoftwareVersion": {
+      "type": "string"
+    },
+    "ProductFirmwareVersion": {
+      "type": "string"
+    },
+    "OutageStartTime": {
+      "type": "string"
+    },
+    "OutageRecoveryTime": {
+      "type": "string"
+    },
+    "CustomerTrackingNumber": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "Case_type",
+    "RequestDate",
+    "RequesterOrganization",
+    "RequesterFirstName",
+    "RequesterEmail",
+    "InstallationCountry",
+    "NetworkStatus",
+    "BusinessImpact",
+    "SubjectTitle",
+    "CustomerTrackingNumber"
+  ]
+}
