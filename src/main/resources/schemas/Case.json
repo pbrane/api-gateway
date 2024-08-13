@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Case",
+  "type": "object",
+  "properties": {
+    "CaseNumber": {
+      "type": "string"
+    },
+    "CaseStatus": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Inprogress",
+        "Closed"
+      ]
+    },
+    "RmaNeeded": {
+      "type": "string",
+      "enum": [
+        "true",
+        "false",
+        ""
+      ]
+    },
+    "Subject": {
+      "type": "string"
+    },
+    "RelatedRMACount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "RelatedDispatchCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "ProblemDescription": {
+      "type": "string"
+    },
+    "InstallationCountry": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 2
+    },
+    "FirstResponseDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "CustomerTrackingNumber": {
+      "type": "string"
+    },
+    "ContactEmail": {
+      "type": "string",
+      "format": "email"
+    },
+    "ProductSoftwareVersion": {
+      "type": "string"
+    },
+    "ProductName": {
+      "type": "string"
+    },
+    "CaseSolutionDescription": {
+      "type": "string"
+    },
+    "CasePriority": {
+      "type": "string",
+      "enum": [
+        "Major",
+        "Minor",
+        "Critical"
+      ]
+    },
+    "CaseOwner": {
+      "type": "string"
+    },
+    "CaseNoteCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "CaseCreatedDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "CaseClosedDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "BusinessImpact": {
+      "type": "string"
+    },
+    "AccountNumber": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "CaseNumber",
+    "CaseStatus",
+    "RmaNeeded",
+    "Subject",
+    "RelatedRMACount",
+    "RelatedDispatchCount",
+    "ProblemDescription",
+    "InstallationCountry",
+    "FirstResponseDate",
+    "CustomerTrackingNumber",
+    "ContactEmail",
+    "ProductSoftwareVersion",
+    "ProductName",
+    "CaseSolutionDescription",
+    "CasePriority",
+    "CaseOwner",
+    "CaseNoteCount",
+    "CaseCreatedDate",
+    "CaseClosedDate",
+    "BusinessImpact",
+    "AccountNumber"
+  ]
+}
