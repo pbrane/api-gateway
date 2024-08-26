@@ -2,15 +2,16 @@ openapi: 3.1.0
 info:
   title: RMA_RestAPI_Design_1
   description: Customer Requirements from Excel Document RMA_RestAPI_Design 1.xlsx
-  version: 0.0.3
+  version: 0.0.4
 tags:
 - name: TACCase
+- name: TACRMA
 paths:
   /tacCases:
     get:
       operationId: listTacCases
       summary: List or find TAC Cases
-      description: "This operation lists all or a subset of TACCase entities. There is an optional set of parameters that allow the searching of TAC Cases. Additionally, a list of fields can be specified to further limit the size of the result set."
+      description: This operation list or find TACCase entities
       tags:
       - TACCase
       parameters:
@@ -98,7 +99,7 @@ paths:
                       description: "Hyperlink, a reference to the TAC Case entity"
                     caseNumber:
                       type: string
-                      description: "Same as ID, required by customer"
+                      description: "Same as ID, requested by customer"
                     caseStatus:
                       type: string
                       description: Status of a TAC Case
@@ -488,70 +489,72 @@ paths:
               - description
               - severity
               - ticketType
-              properties:
-                requestDate:
-                  type: string
-                  format: date-time
-                  description: The date on which the TAC Case create was requested
-                requestorOrganization:
-                  type: string
-                  description: The Organization that is requesting the TAC Case
-                  examples:
-                  - MSFT
-                requestorFirstName:
-                  type: string
-                requestorLastName:
-                  type: string
-                requestorEmail:
-                  format: email
-                requestorPhome:
-                  format: phone
-                installationCountry:
-                  type: string
-                  format: country
-                networkStatus:
-                  type: string
-                  enum:
-                  - Production
-                  - Test
-                  - Development
-                businessImpact:
-                  type: string
-                  description: The impact to the customer's business associated with this Case
-                  examples:
-                  - Critical level business impacting issue
-                  - Major level business impacting issue
-                  - Minor level business impacting issue
-                  - Warning level business impacting issue
-                subject:
-                  type: string
-                  description: Subject of TAC Case
-                problemDescription:
-                  type: string
-                  description: Description of the issue in this case
-                productName:
-                  type: string
-                  description: The name of the product associated with this TAC Case
-                productSerialNumber:
-                  type: string
-                  description: The serial number of the product associcated with this TAC Case
-                productFirmwareVersion:
-                  type: string
-                  description: The version number of the product associcated with this TAC Case
-                productSoftwareVersion:
-                  type: string
-                  description: The version number of the product associcated with this TAC Case
-                outageStartTime:
-                  type: string
-                  description: The date and time that the outage assocated with this case was detected
-                  format: date-time
-                outageRecoveryTime:
-                  type: string
-                  description: The date and time that the outage assocated with this case was recovered
-                  format: date-time
-                customerTrackingNumber:
-                  type: string
-                  description: A Reference to the customer's issue associated with this Case
+              allOf:
+              - type: object
+                properties:
+                  requestDate:
+                    type: string
+                    format: date-time
+                    description: The date on which the TAC Case create was requested
+                  requestorOrganization:
+                    type: string
+                    description: The Organization that is requesting the TAC Case
+                    examples:
+                    - MSFT
+                  requestorFirstName:
+                    type: string
+                  requestorLastName:
+                    type: string
+                  requestorEmail:
+                    format: email
+                  requestorPhone:
+                    format: phone
+                  installationCountry:
+                    type: string
+                    format: country
+                  networkStatus:
+                    type: string
+                    enum:
+                    - Production
+                    - Test
+                    - Development
+                  businessImpact:
+                    type: string
+                    description: The impact to the customer's business associated with this Case
+                    examples:
+                    - Critical level business impacting issue
+                    - Major level business impacting issue
+                    - Minor level business impacting issue
+                    - Warning level business impacting issue
+                  subject:
+                    type: string
+                    description: Subject of TAC Case
+                  problemDescription:
+                    type: string
+                    description: Description of the issue in this case
+                  productName:
+                    type: string
+                    description: The name of the product associated with this TAC Case
+                  productSerialNumber:
+                    type: string
+                    description: The serial number of the product associated with this TAC Case
+                  productFirmwareVersion:
+                    type: string
+                    description: The version number of the product associated with this TAC Case
+                  productSoftwareVersion:
+                    type: string
+                    description: The version number of the product associated with this TAC Case
+                  outageStartTime:
+                    type: string
+                    description: The date and time that the outage associated with this case was detected
+                    format: date-time
+                  outageRecoveryTime:
+                    type: string
+                    description: The date and time that the outage associated with this case was recovered
+                    format: date-time
+                  customerTrackingNumber:
+                    type: string
+                    description: A Reference to the customer's issue associated with this Case
         description: The TroubleTicket to be created
         required: true
       responses:
@@ -571,7 +574,7 @@ paths:
                     description: "Hyperlink, a reference to the TAC Case entity"
                   caseNumber:
                     type: string
-                    description: "Same as ID, required by customer"
+                    description: "Same as ID, requested by customer"
                   caseStatus:
                     type: string
                     description: Status of a TAC Case
@@ -987,7 +990,7 @@ paths:
                     description: "Hyperlink, a reference to the TAC Case entity"
                   caseNumber:
                     type: string
-                    description: "Same as ID, required by customer"
+                    description: "Same as ID, requested by customer"
                   caseStatus:
                     type: string
                     description: Status of a TAC Case
@@ -1387,7 +1390,7 @@ paths:
                   description: "Hyperlink, a reference to the TAC Case entity"
                 caseNumber:
                   type: string
-                  description: "Same as ID, required by customer"
+                  description: "Same as ID, requested by customer"
                 caseStatus:
                   type: string
                   description: Status of a TAC Case
@@ -2984,6 +2987,179 @@ components:
       schema:
         type: string
   schemas:
+    CommonCaseProperties:
+      type: object
+      properties:
+        requestDate:
+          type: string
+          format: date-time
+          description: The date on which the TAC Case create was requested
+        requestorOrganization:
+          type: string
+          description: The Organization that is requesting the TAC Case
+          examples:
+          - MSFT
+        requestorFirstName:
+          type: string
+        requestorLastName:
+          type: string
+        requestorEmail:
+          format: email
+        requestorPhone:
+          format: phone
+        installationCountry:
+          type: string
+          format: country
+        networkStatus:
+          type: string
+          enum:
+          - Production
+          - Test
+          - Development
+        businessImpact:
+          type: string
+          description: The impact to the customer's business associated with this Case
+          examples:
+          - Critical level business impacting issue
+          - Major level business impacting issue
+          - Minor level business impacting issue
+          - Warning level business impacting issue
+        subject:
+          type: string
+          description: Subject of TAC Case
+        problemDescription:
+          type: string
+          description: Description of the issue in this case
+        productName:
+          type: string
+          description: The name of the product associated with this TAC Case
+        productSerialNumber:
+          type: string
+          description: The serial number of the product associated with this TAC Case
+        productFirmwareVersion:
+          type: string
+          description: The version number of the product associated with this TAC Case
+        productSoftwareVersion:
+          type: string
+          description: The version number of the product associated with this TAC Case
+        outageStartTime:
+          type: string
+          description: The date and time that the outage associated with this case was detected
+          format: date-time
+        outageRecoveryTime:
+          type: string
+          description: The date and time that the outage associated with this case was recovered
+          format: date-time
+        customerTrackingNumber:
+          type: string
+          description: A Reference to the customer's issue associated with this Case
+    RmaCase_Create:
+      type: object
+      description: |-
+        A TAC Case is a record of an issue that is created, tracked, and managed by the TAC Case management system
+        Skipped properties: id,href
+      required:
+      - description
+      - severity
+      - ticketType
+      allOf:
+      - type: object
+        properties:
+          requestDate:
+            type: string
+            format: date-time
+            description: The date on which the TAC Case create was requested
+          requestorOrganization:
+            type: string
+            description: The Organization that is requesting the TAC Case
+            examples:
+            - MSFT
+          requestorFirstName:
+            type: string
+          requestorLastName:
+            type: string
+          requestorEmail:
+            format: email
+          requestorPhone:
+            format: phone
+          installationCountry:
+            type: string
+            format: country
+          networkStatus:
+            type: string
+            enum:
+            - Production
+            - Test
+            - Development
+          businessImpact:
+            type: string
+            description: The impact to the customer's business associated with this Case
+            examples:
+            - Critical level business impacting issue
+            - Major level business impacting issue
+            - Minor level business impacting issue
+            - Warning level business impacting issue
+          subject:
+            type: string
+            description: Subject of TAC Case
+          problemDescription:
+            type: string
+            description: Description of the issue in this case
+          productName:
+            type: string
+            description: The name of the product associated with this TAC Case
+          productSerialNumber:
+            type: string
+            description: The serial number of the product associated with this TAC Case
+          productFirmwareVersion:
+            type: string
+            description: The version number of the product associated with this TAC Case
+          productSoftwareVersion:
+            type: string
+            description: The version number of the product associated with this TAC Case
+          outageStartTime:
+            type: string
+            description: The date and time that the outage associated with this case was detected
+            format: date-time
+          outageRecoveryTime:
+            type: string
+            description: The date and time that the outage associated with this case was recovered
+            format: date-time
+          customerTrackingNumber:
+            type: string
+            description: A Reference to the customer's issue associated with this Case
+      - type: object
+        properties:
+          relatedTacCaseId:
+            type: string
+            description: This assumes that an RMA case is a child case to an existing TAC Case
+          faultySerialNumber:
+            type: string
+            description: This is the serial number of the faulty device requiring the RMA
+          RequesterShippingFirstName:
+            type: string
+          RequesterShippingLastName:
+            type: string
+          RequesterShippingEmail:
+            type: string
+            format: email
+          RequesterShippingPhone:
+            type: string
+            format: phone
+          RequesterShippingStreet:
+            type: string
+          RequesterShippingCity:
+            type: string
+          RequesterShippingStateProvince:
+            type: string
+          RequesterShippingCountry:
+            type: string
+          RequesterShippingPostalCode:
+            type: string
+          ShippingInboundId:
+            type: string
+          ShippingOutboundId:
+            type: string
     TACCase:
       type: object
       description: A TAC Case
@@ -2996,7 +3172,7 @@ components:
           description: "Hyperlink, a reference to the TAC Case entity"
         caseNumber:
           type: string
-          description: "Same as ID, required by customer"
+          description: "Same as ID, requested by customer"
         caseStatus:
           type: string
           description: Status of a TAC Case
@@ -3118,70 +3294,72 @@ components:
       - description
       - severity
       - ticketType
-      properties:
-        requestDate:
-          type: string
-          format: date-time
-          description: The date on which the TAC Case create was requested
-        requestorOrganization:
-          type: string
-          description: The Organization that is requesting the TAC Case
-          examples:
-          - MSFT
-        requestorFirstName:
-          type: string
-        requestorLastName:
-          type: string
-        requestorEmail:
-          format: email
-        requestorPhome:
-          format: phone
-        installationCountry:
-          type: string
-          format: country
-        networkStatus:
-          type: string
-          enum:
-          - Production
-          - Test
-          - Development
-        businessImpact:
-          type: string
-          description: The impact to the customer's business associated with this Case
-          examples:
-          - Critical level business impacting issue
-          - Major level business impacting issue
-          - Minor level business impacting issue
-          - Warning level business impacting issue
-        subject:
-          type: string
-          description: Subject of TAC Case
-        problemDescription:
-          type: string
-          description: Description of the issue in this case
-        productName:
-          type: string
-          description: The name of the product associated with this TAC Case
-        productSerialNumber:
-          type: string
-          description: The serial number of the product associcated with this TAC Case
-        productFirmwareVersion:
-          type: string
-          description: The version number of the product associcated with this TAC Case
-        productSoftwareVersion:
-          type: string
-          description: The version number of the product associcated with this TAC Case
-        outageStartTime:
-          type: string
-          description: The date and time that the outage assocated with this case was detected
-          format: date-time
-        outageRecoveryTime:
-          type: string
-          description: The date and time that the outage assocated with this case was recovered
-          format: date-time
-        customerTrackingNumber:
-          type: string
-          description: A Reference to the customer's issue associated with this Case
+      allOf:
+      - type: object
+        properties:
+          requestDate:
+            type: string
+            format: date-time
+            description: The date on which the TAC Case create was requested
+          requestorOrganization:
+            type: string
+            description: The Organization that is requesting the TAC Case
+            examples:
+            - MSFT
+          requestorFirstName:
+            type: string
+          requestorLastName:
+            type: string
+          requestorEmail:
+            format: email
+          requestorPhone:
+            format: phone
+          installationCountry:
+            type: string
+            format: country
+          networkStatus:
+            type: string
+            enum:
+            - Production
+            - Test
+            - Development
+          businessImpact:
+            type: string
+            description: The impact to the customer's business associated with this Case
+            examples:
+            - Critical level business impacting issue
+            - Major level business impacting issue
+            - Minor level business impacting issue
+            - Warning level business impacting issue
+          subject:
+            type: string
+            description: Subject of TAC Case
+          problemDescription:
+            type: string
+            description: Description of the issue in this case
+          productName:
+            type: string
+            description: The name of the product associated with this TAC Case
+          productSerialNumber:
+            type: string
+            description: The serial number of the product associated with this TAC Case
+          productFirmwareVersion:
+            type: string
+            description: The version number of the product associated with this TAC Case
+          productSoftwareVersion:
+            type: string
+            description: The version number of the product associated with this TAC Case
+          outageStartTime:
+            type: string
+            description: The date and time that the outage associated with this case was detected
+            format: date-time
+          outageRecoveryTime:
+            type: string
+            description: The date and time that the outage associated with this case was recovered
+            format: date-time
+          customerTrackingNumber:
+            type: string
+            description: A Reference to the customer's issue associated with this Case
     Note:
       type: object
       description: Extra information about a given TAC Case
