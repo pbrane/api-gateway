@@ -2,16 +2,15 @@ openapi: 3.1.0
 info:
   title: RMA_RestAPI_Design_1
   description: Customer Requirements from Excel Document RMA_RestAPI_Design 1.xlsx
-  version: 0.0.1
+  version: 0.0.3
 tags:
-- name: tacCase
-- name: tacRMA
+- name: TACCase
 paths:
   /tacCases:
     get:
       operationId: listTacCases
       summary: List or find TAC Cases
-      description: This operation list or find TACCase entities
+      description: "This operation lists all or a subset of TACCase entities. There is an optional set of parameters that allow the searching of TAC Cases. Additionally, a list of fields can be specified to further limit the size of the result set."
       tags:
       - TACCase
       parameters:
