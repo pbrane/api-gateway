@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$ref": "core-schema.json",
+  "title": "Case Error Response Schema",
+  "type": "object",
+  "properties": {
+    "errors": {
+      "type": "array",
+      "items": {
+        "$ref": "core-schema.json"
+      }
+    }
+  },
+  "required": ["errors"]
+}

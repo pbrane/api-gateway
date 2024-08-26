@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$ref": "core-schema.json",
+  "title": "RMA Case Schema",
+  "type": "object",
+  "properties": {
+    "CaseNumber": {
+      "type": "string"
+    },
+    "CaseId": {
+      "type": "string"
+    },
+    "RelatedTacCaseId": {
+      "type": "string"
+    },
+    "RequestType": {
+      "type": "string",
+      "enum": ["Normal", "Escalated"]
+    },
+    "NewPartSerialNumber": {
+      "type": "string"
+    },
+    "NewPartNumber": {
+      "type": "string"
+    },
+    "FaultySerialNumber": {
+      "type": "string"
+    },
+    "FaultyPartNumber": {
+      "type": "string"
+    },
+    "ReturnedSerialNumber": {
+      "type": "string"
+    },
+    "ReturnedPartNumber": {
+      "type": "string"
+    },
+    "CaseStatus": {
+      "type": "string",
+      "enum": ["Open"]
+    },
+    "NewPartShippedDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "NewPartDeliveredDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "FaultyPartShippedDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "FaultyPartDeliveredDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "FailureAnalysisStartDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "FailureAnalysisInProgressDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "FailureAnalysisFinishedDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "ShipToStreet1": {
+      "type": "string"
+    },
+    "ShipToProvince": {
+      "type": "string"
+    },
+    "ShipToPostalCode": {
+      "type": "string"
+    },
+    "ShipToPhone": {
+      "type": "string"
+    },
+    "ShipToCountry": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 2
+    },
+    "ShipToCity": {
+      "type": "string"
+    },
+    "ShipToContactEmail": {
+      "type": "string",
+      "format": "email"
+    },
+    "ShipToAttention": {
+      "type": "string"
+    },
+    "ShippedDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "ShippedCarrier": {
+      "type": "string"
+    },
+    "ProblemDescription": {
+      "type": "string"
+    },
+    "InstallationCountry": {
+      "$ref": "core-schema.json#/properties/InstallationCountry"
+    },
+    "CustomerTrackingNumber": {
+      "$ref": "core-schema.json#/properties/CustomerTrackingNumber"
+    },
+    "ContactEmail": {
+      "$ref": "core-schema.json#/properties/ContactEmail"
+    }
+  },
+  "required": [
+    "CaseNumber",
+    "CaseId",
+    "RequestType",
+    "CaseStatus",
+    "ShipToStreet1",
+    "ShipToCountry",
+    "ShipToCity",
+    "ShipToContactEmail",
+    "ProblemDescription",
+    "InstallationCountry",
+    "CustomerTrackingNumber",
+    "ContactEmail"
+  ]
+}
